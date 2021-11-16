@@ -22,9 +22,9 @@ struct s_philo
 	int				id; //"name" of each philo
 	pthread_t		thread;
 	pthread_mutex_t	mutex_fork;
+	int				eat_count;
 	t_data			*data;
 };
-
 
 struct s_data
 {
@@ -33,12 +33,12 @@ struct s_data
 	int		time_eat;
 	int		time_sleep;
 	int		eat_count;
-	long	start_time;
-	long	actual_time;
+	long	time_start;
+	long	time_actual;
+	int		died;
+	int		ready;
 	t_philo	*philo;
 };
-
-
 
 /* Libft Functions */
 int		ft_atoi(const char *str);
@@ -51,9 +51,13 @@ int		ft_strcmp(char *s1, char *s2);
 int		args_are_valid(int argc, char **argv);
 int		check_overflow(t_data *philo, char **argv);
 
+/* init */
+void	init_struct(t_data *data);
+
 /* parsing */
 int		get_number_to_struct(t_data *philo, char **argv);
 
-
+/* time */
+long	get_time_in_ms(void);
 
 #endif

@@ -9,24 +9,35 @@
 5 [number_of_times_each_philosopher_must_eat]
 */
 
-void	init_philo(t_philo *philo, int i)
+void	philo_activities(void *arg)
 {
-	philo->id = i;
-//	philo->thread =
-	// pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg);
-	// pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *attr);
+	t_philo	*philo;
 
-	init_struct(philo->data);
+	philo = (t_philo *)arg;
+	while (!philo->data->ready)
+		usleep(500); //at least 500 usec
+	if (philo->id % 2 == 0) // one group has to wait
+		usleep(2000);
+	while ((philo->data->eat_count == -1 || philo->eat_count < philo->data->eat_count)
+		&& philo->data->died == 0)
+	{
+		eating_func;
+		sleep_func;
+	}
 }
 
-void	init_all_philo(t_data *data, t_philo *philo)
+void	init_philo(t_data *data)
 {
-	int	i;
+	int		i;
 
-	i = 1;
-	while (i <= data->philo_count)
+	i = 0;
+	while (i < data->philo_count)
 	{
-		init_philo(philo, i);
+		data->philo[i].id = i + 1;
+		data->philo[i].eat_count = 0;
+		data->philo[i].data = data;
+		pthread_create(&data->philo[i].thread, NULL, philo_activities, &data->philo[i]);
+		pthread_mutex_init(&data->philo[i].mutex_fork, NULL);
 		i++;
 	}
 }
@@ -38,6 +49,8 @@ void	init_struct(t_data *data)
 	data->time_eat = 0;
 	data->time_sleep = 0;
 	data->eat_count = -1;
+	data->died = 0;
+	data->ready = 0;
 }
 
 int		get_number_to_struct(t_data *philo, char **argv)

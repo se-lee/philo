@@ -2,10 +2,11 @@ NAME = philo
 
 SRCS =	check_error.c	\
 		libft_fns.c		\
-		parsing.c		\
 		main.c			\
+		parsing.c		\
+		time.c			\
 
-GCCF = gcc -g -Wall -Wextra -Werror #-fsanitize=address
+GCCF = gcc -g #-Wall -Wextra -Werror #-fsanitize=address
 
 OBJS = $(addprefix bin/, ${SRCS:.c=.o})
 
