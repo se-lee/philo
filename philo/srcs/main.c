@@ -1,8 +1,24 @@
 #include "philo.h"
 
+
+
+/*
+main loop:
+- get the time
+- check if someone died
+
+
+subtract actual_time - start_time to get the duration
+
+*/
+
+
+
+
+
 int	main(int argc, char **argv)
 {
-	t_philo	philo;
+	t_data	philo;
 
 	if  (args_are_valid(argc, argv))
 	{
@@ -16,4 +32,3 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
-
