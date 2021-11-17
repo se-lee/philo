@@ -15,7 +15,7 @@ void	eating_func(t_philo *philo)
 	pthread_mutex_lock(&philo->mutex_fork);
 	print_status(philo, "has taken a fork\n", FALSE);
 	if (philo->id == 1)
-		pthread_mutex_lock(&philo->data->philo[philo->data->philo_count].mutex_fork);
+		pthread_mutex_lock(&philo->data->philo[philo->data->philo_count - 1].mutex_fork);
 	else
 		pthread_mutex_lock(&philo->data->philo[philo->id - 2].mutex_fork); //philo before you
 	print_status(philo, "has taken a fork\n", FALSE);
@@ -26,7 +26,7 @@ void	eating_func(t_philo *philo)
 	ft_wait(philo->data, philo->data->time_eat);
 	pthread_mutex_unlock(&philo->mutex_fork);
 	if (philo->id == 1)
-		pthread_mutex_unlock(&philo->data->philo[philo->data->philo_count].mutex_fork);
+		pthread_mutex_unlock(&philo->data->philo[philo->data->philo_count - 1].mutex_fork);
 	else
 		pthread_mutex_unlock(&philo->data->philo[philo->id - 2].mutex_fork); //philo before you
 	philo->eat_count++;
@@ -47,9 +47,9 @@ void	*philo_activities(void *arg)
 	philo = (t_philo *)arg;
 	while (!philo->data->ready)
 		usleep(500); //at least 500 usec
-	pthread_mutex_lock(&philo->check);
+	// pthread_mutex_lock(&philo->check);
 	philo->time_before_die = philo->data->time_actual + philo->data->time_die;
-	pthread_mutex_unlock(&philo->check);
+	// pthread_mutex_unlock(&philo->check);
 	if (philo->id % 2 == 0) // one group has to wait
 		usleep(2000);
 	while ((philo->data->eat_count == -1 || philo->eat_count < philo->data->eat_count)
