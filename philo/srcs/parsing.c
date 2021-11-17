@@ -1,58 +1,75 @@
 #include "philo.h"
 
-/*
-0 ./philo 
-1 number_of_philosophers 
-2 time_to_die 
-3 time_to_eat 
-4 time_to_sleep 
-5 [number_of_times_each_philosopher_must_eat]
-*/
-
-void	philo_activities(void *arg)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *)arg;
-	while (!philo->data->ready)
-		usleep(500); //at least 500 usec
-	if (philo->id % 2 == 0) // one group has to wait
-		usleep(2000);
-	while ((philo->data->eat_count == -1 || philo->eat_count < philo->data->eat_count)
-		&& philo->data->died == 0)
-	{
-		eating_func;
-		sleep_func;
-	}
-}
-
-void	init_philo(t_data *data)
+int	args_are_digit(char **argv)
 {
 	int		i;
-
-	i = 0;
-	while (i < data->philo_count)
+	int		j;
+	
+	i = 1;
+	while (argv[i])
 	{
-		data->philo[i].id = i + 1;
-		data->philo[i].eat_count = 0;
-		data->philo[i].data = data;
-		pthread_create(&data->philo[i].thread, NULL, philo_activities, &data->philo[i]);
-		pthread_mutex_init(&data->philo[i].mutex_fork, NULL);
+		j = 0;
+		while (argv[i][j])
+		{
+			if (ft_isdigit(argv[i][j]) == FALSE)
+				return (FALSE);
+			j++;
+		}
 		i++;
 	}
-	data->time_start = get_time_in_ms();
-	data->ready = 1;
+	return (TRUE);
 }
 
-void	init_struct(t_data *data)
+int		check_overflow(t_data *philo, char **argv)
 {
-	data->philo_count = 0;
-	data->time_die = 0;
-	data->time_eat = 0;
-	data->time_sleep = 0;
-	data->eat_count = -1;
-	data->died = 0;
-	data->ready = 0;
+	char	*temp;
+
+	temp = ft_itoa(philo->philo_count);
+	if (ft_strcmp(argv[1], temp) != 0)
+		return (TRUE);
+	free(temp);
+	temp = ft_itoa(philo->time_die);
+	if (ft_strcmp(argv[2], temp) != 0)
+		return (TRUE);
+	free(temp);
+	temp = ft_itoa(philo->time_eat);
+	if (ft_strcmp(argv[3], temp) != 0)
+		return (TRUE);
+	free(temp);
+	temp = ft_itoa(philo->time_sleep);
+	if (ft_strcmp(argv[4], temp) != 0)
+	{
+		free(temp);	
+		return (TRUE);	
+	}
+	if (argv[5])
+	{
+		temp = ft_itoa(philo->eat_count);
+		if (ft_strcmp(argv[5], temp) != 0)
+		{
+			free(temp);
+			return (TRUE);
+		}
+	}
+	return (FALSE);
+}
+
+int		args_are_valid(int argc, char **argv)
+{
+	if (!args_are_digit(argv))
+	{
+		ft_putstr_fd("error: argument not numeric\n", 2);
+		return (FALSE);
+	}
+	if (argc != 5 && argc != 6)
+	{
+		if (argc < 5)
+			ft_putstr_fd("error: too few arguments\n", 2);
+		else
+			ft_putstr_fd("error: too many arguments\n", 2);
+		return (FALSE);
+	}
+	return (TRUE);
 }
 
 int		get_number_to_struct(t_data *philo, char **argv)

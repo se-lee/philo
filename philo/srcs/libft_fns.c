@@ -109,6 +109,11 @@ int	ft_strcmp(char *s1, char *s2)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
 void	ft_putnbr_fd(int n, int fd)
 {
 	if (n == -2147483648)
