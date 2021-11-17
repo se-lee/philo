@@ -4,12 +4,11 @@ void	ft_wait(t_data *data, int time_to_wait)
 {
 	long	time;
 
-	time = time_to_wait + data->time_actual; // convert into timestamp because time_to_sleep is duration, not the actual time since 1970
+	time = time_to_wait + data->time_actual;
 	while (data->time_actual < time && !data->died)
 		usleep(200);
 }
 
-/* lock print_mutext so that it doesnt write at the same moment */
 void	eating_func(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->mutex_fork);
@@ -46,11 +45,9 @@ void	*philo_activities(void *arg)
 
 	philo = (t_philo *)arg;
 	while (!philo->data->ready)
-		usleep(500); //at least 500 usec
-	// pthread_mutex_lock(&philo->check);
+		usleep(500);
 	philo->time_before_die = philo->data->time_actual + philo->data->time_die;
-	// pthread_mutex_unlock(&philo->check);
-	if (philo->id % 2 == 0) // one group has to wait
+	if (philo->id % 2 == 0)
 		usleep(2000);
 	while ((philo->data->eat_count == -1 || philo->eat_count < philo->data->eat_count)
 		&& philo->data->died == 0)

@@ -29,10 +29,6 @@ void	main_loop(t_data *data)
 			&& (data->eat_count == -1 || data->philo[i].eat_count < data->eat_count))
 			print_status(&data->philo[i], "died\n", TRUE);
 		pthread_mutex_unlock(&data->philo->check);
-			// data.died = 1;
-		// }
-		// else if (data->philo_finished == data->philo_count)
-		// 	ft_putstr_fd("all philosophers have eaten\n", 1);
 		i++;
 	}
 }
@@ -48,26 +44,10 @@ int	main(int argc, char **argv)
 			return (0);
 		data.philo = malloc(sizeof(t_philo) * data.philo_count);
 		init_philo(&data);
-		while (!data.died && data.philo_finished != data.philo_count) //add eat count condition (if data.eat_count is same as philo.eat_count)
-		{
+		while (!data.died && data.philo_finished != data.philo_count)
 			main_loop(&data);
-			// data.time_actual = get_time_in_ms();
-			// i = 0;
-			// while (i < data.philo_count && !data.died && data.philo_finished != data.philo_count)
-			// {
-			// 	if ((data.time_actual > data.philo[i].time_before_die))
-			// 	{
-			// 	pthread_mutex_lock(&data.philo->check);
-			// 		print_status(&data.philo[i], "died\n", TRUE);
-			// 		// data.died = 1;
-			// 	pthread_mutex_unlock(&data.philo->check);
-			// 	}
-			// 	else if (data.philo_finished == data.philo_count)
-			// 		ft_putstr_fd("all philosophers have eaten\n", 1);
-			// 	i++;
-		}
 	}
-		data.died = 1; //to confirm the simulation is finished
+		data.died = 1;
 		i = 0;
 		while (pthread_join(data.philo[i].thread, NULL))
 		{
