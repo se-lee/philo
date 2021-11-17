@@ -46,6 +46,7 @@ int		ft_isdigit(int c);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_itoa(int n);
 int		ft_strcmp(char *s1, char *s2);
+void	ft_putnbr_fd(int n, int fd);
 
 /* check error  */
 int		args_are_valid(int argc, char **argv);

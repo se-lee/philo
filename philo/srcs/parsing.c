@@ -40,6 +40,8 @@ void	init_philo(t_data *data)
 		pthread_mutex_init(&data->philo[i].mutex_fork, NULL);
 		i++;
 	}
+	data->time_start = get_time_in_ms();
+	data->ready = 1;
 }
 
 void	init_struct(t_data *data)

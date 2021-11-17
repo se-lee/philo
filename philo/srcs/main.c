@@ -29,7 +29,9 @@ int	main(int argc, char **argv)
 		printf("time_sleep:%d\n", data.time_sleep);
 		printf("eat_count:%d\n", data.eat_count);
 	}
-	
-
+	while (!data.died) //add eat count
+	{
+		data.time_actual = get_time_in_ms();
+	}
 	return (0);
 }
