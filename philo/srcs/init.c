@@ -28,6 +28,6 @@ void	init_struct(t_data *data)
 	data->eat_count = -1;
 	data->died = 0;
 	data->ready = 0;
+	data->philo_finished = 0;
 	pthread_mutex_init(&data->print_mutex, NULL);
-
 }

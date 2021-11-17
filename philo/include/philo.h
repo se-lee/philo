@@ -15,7 +15,6 @@
 typedef struct s_data t_data;
 typedef struct s_philo t_philo;
 
-
 /* every single philosopher will have this struct */
 struct s_philo
 {
@@ -24,6 +23,7 @@ struct s_philo
 	pthread_mutex_t	mutex_fork;
 	int				eat_count;
 	long			time_before_die;
+	pthread_mutex_t	check;
 	t_data			*data;
 };
 
@@ -38,6 +38,7 @@ struct s_data
 	long	time_actual;
 	int		died;
 	int		ready;
+	int		philo_finished;
 	pthread_mutex_t	print_mutex;
 	t_philo	*philo;
 };
@@ -68,8 +69,11 @@ long	get_time_in_ms(void);
 /* activity */
 void	sleeping_func(t_philo *philo);
 void	eating_func(t_philo *philo);
-void	ft_sleep(t_data *data, int time_to_sleep);
-void	print_status(t_philo *philo, char *str);
+void	ft_wait(t_data *data, int time_to_sleep);
 void	*philo_activities(void *arg);
+
+/* utils */
+void	*malloc_protected(int size, int count);
+void	print_status(t_philo *philo, char *str, int in_main);
 
 #endif

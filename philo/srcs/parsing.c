@@ -20,10 +20,30 @@ int	args_are_digit(char **argv)
 	return (TRUE);
 }
 
+// int		nbr_overflow(char *arg, int nbr_to_compare)
+// {
+// 	char	*temp;
+
+// 	temp = itoa(nbr_to_compare);
+// 	if (ft_strcmp(arg, temp) != 0)
+// 	{
+// 		free(temp);
+// 		return (TRUE);
+// 	}
+// 	else
+// 	{
+// 		free(temp);
+// 		return (FALSE);
+// 	}
+// }
+
 int		check_overflow(t_data *philo, char **argv)
 {
-	char	*temp;
+	// int		result;
 
+	// nbr_overflow(argv[1], philo->philo_count);
+	
+	char	*temp;
 	temp = ft_itoa(philo->philo_count);
 	if (ft_strcmp(argv[1], temp) != 0)
 		return (TRUE);

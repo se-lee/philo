@@ -27,20 +27,23 @@ int	main(int argc, char **argv)
 			return (0);
 		data.philo = malloc(sizeof(t_philo) * data.philo_count);
 		init_philo(&data);
-		while (!data.died) //add eat count condition (if data.eat_count is same as philo.eat_count)
+		while (!data.died && data.philo_finished != data.philo_count) //add eat count condition (if data.eat_count is same as philo.eat_count)
 		{
 			data.time_actual = get_time_in_ms();
 			i = 0;
-			while (i < data.philo_count && !data.died)
+			while (i < data.philo_count && !data.died && data.philo_finished != data.philo_count)
 			{
 				if ((data.time_actual > data.philo[i].time_before_die))
 				{
-					print_status(&data.philo[i], "died\n");
+					print_status(&data.philo[i], "died\n", TRUE);
 					data.died = 1;
 				}
+				else if (data.philo_finished == data.philo_count)
+					ft_putstr_fd("all philosophers have eaten\n", 1);
 				i++;
 			}
 		}
+		data.died = 1; //to confirm the simulation is finished
 		i = 0;
 		while (pthread_join(data.philo[i].thread, NULL))
 		{

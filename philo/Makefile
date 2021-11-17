@@ -1,11 +1,13 @@
 NAME = philo
 
-SRCS =	activity.c		\
-		init.c			\
-		libft_fns.c		\
-		main.c			\
-		parsing.c		\
-		time.c			\
+SRCS =	activity.c			\
+		init.c				\
+		libft_parsing.c		\
+		libft_print.c		\
+		main.c				\
+		parsing.c			\
+		time.c				\
+		utils.c				\
 
 GCCF = gcc -g -fsanitize=address #-Wall -Wextra -Werror 
 
