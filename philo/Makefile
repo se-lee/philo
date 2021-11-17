@@ -9,7 +9,7 @@ SRCS =	activity.c			\
 		time.c				\
 		utils.c				\
 
-GCCF = gcc -g -fsanitize=address #-Wall -Wextra -Werror 
+GCCF = gcc -g -fsanitize=address -Wall -Wextra -Werror
 
 OBJS = $(addprefix bin/, ${SRCS:.c=.o})
 

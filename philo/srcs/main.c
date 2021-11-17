@@ -14,6 +14,11 @@ main loop:
 
 subtract actual_time - start_time to get th
 e duration
+
+Todo
+1) handle a case where there is only one philosopher
+2) protect functions with initializing threads/mutex, get time...what else?
+
 */
 
 void	main_loop(t_data *data)
@@ -26,7 +31,7 @@ void	main_loop(t_data *data)
 		data->time_actual = get_time_in_ms();
 		pthread_mutex_lock(&data->philo->check);
 		if ((data->time_actual > data->philo[i].time_before_die) 
-			&& (data->eat_count == -1 || data->philo[i].eat_count < data->eat_count))
+			&& (data->eat_count == -1 || data->philo[i].times_ate < data->eat_count))
 			print_status(&data->philo[i], "died\n", TRUE);
 		pthread_mutex_unlock(&data->philo->check);
 		i++;
@@ -38,15 +43,16 @@ int	main(int argc, char **argv)
 	t_data	data;
 	int		i;
 
-	if  (args_are_valid(argc, argv))
+	if (argc == 5 || argc == 6)
 	{
-		if (get_number_to_struct(&data, argv) == FALSE)
-			return (0);
-		data.philo = malloc(sizeof(t_philo) * data.philo_count);
-		init_philo(&data);
+		if (!args_are_digit(argv))
+			return (-1);
+		if (!put_valid_number_to_struct(&data, argv))
+			return (-1);
+		data.philo = malloc_protected(sizeof(t_philo), data.philo_count);
+		init_all_philo(&data);
 		while (!data.died && data.philo_finished != data.philo_count)
 			main_loop(&data);
-	}
 		data.died = 1;
 		i = 0;
 		while (pthread_join(data.philo[i].thread, NULL))
@@ -55,5 +61,7 @@ int	main(int argc, char **argv)
 			data.time_actual = get_time_in_ms();
 			i++;
 		}
+	}
+	ft_putstr_fd("invalid number of arguments\n", 2);
 	return (0);
 }

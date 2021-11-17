@@ -18,10 +18,10 @@ typedef struct s_philo t_philo;
 /* every single philosopher will have this struct */
 struct s_philo
 {
-	int				id; //"name" of each philo
+	int				id;
 	pthread_t		thread;
 	pthread_mutex_t	mutex_fork;
-	int				eat_count;
+	int				times_ate;
 	long			time_before_die;
 	pthread_mutex_t	check;
 	t_data			*data;
@@ -29,48 +29,48 @@ struct s_philo
 
 struct s_data
 {
-	int		philo_count;
-	int		time_die;
-	int		time_eat;
-	int		time_sleep;
-	int		eat_count;
-	long	time_start;
-	long	time_actual;
-	int		died;
-	int		ready;
-	int		philo_finished;
+	int				philo_count;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				eat_count;
+	long			time_start;
+	long			time_actual;
+	int				died;
+	int				ready;
+	int				philo_finished;
 	pthread_mutex_t	print_mutex;
-	t_philo	*philo;
+	t_philo			*philo;
 };
 
-/* Libft Functions */
-int		ft_atoi(const char *str);
-int		ft_isdigit(int c);
-void	ft_putstr_fd(char *s, int fd);
-char	*ft_itoa(int n);
-int		ft_strcmp(char *s1, char *s2);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_putchar_fd(char c, int fd);
-
-/* check error  */
-int		args_are_valid(int argc, char **argv);
-int		check_overflow(t_data *philo, char **argv);
+/* activity */
+void	wait_upto(t_data *data, int time_to_wait);
+void	philo_eating(t_philo *philo);
+void	philo_sleeping(t_philo *philo);
+void	*philo_activities(void *arg);
 
 /* init */
 void	init_struct(t_data *data);
-void	init_philo(t_data *data);
+void	init_all_philo(t_data *data);
 
-/* parsing */
-int		get_number_to_struct(t_data *philo, char **argv);
+/* Libft parsing */
+int		ft_isdigit(int c);
+int		ft_atoi(const char *str);
+char	*ft_itoa(int n);
+int		ft_strcmp(char *s1, char *s2);
+
+/* Libft print */
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putnbr_fd(int n, int fd);
+
+/* parsing  */
+int		args_are_digit(char **argv);
+int		is_overflow(t_data *philo, char **argv);
+int		put_valid_number_to_struct(t_data *philo, char **argv);
 
 /* time */
 long	get_time_in_ms(void);
-
-/* activity */
-void	sleeping_func(t_philo *philo);
-void	eating_func(t_philo *philo);
-void	ft_wait(t_data *data, int time_to_sleep);
-void	*philo_activities(void *arg);
 
 /* utils */
 void	*malloc_protected(int size, int count);
