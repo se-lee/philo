@@ -17,7 +17,6 @@ void	print_status(t_philo *philo, char *str, int in_main)
 {
 	pthread_mutex_lock(&philo->data->print_mutex);
 	if (philo->data->died == 1)
-	{
 		pthread_mutex_unlock(&philo->data->print_mutex);
 		return ;
 	}

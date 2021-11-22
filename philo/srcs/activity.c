@@ -16,7 +16,7 @@ void	philo_eating(t_philo *philo)
 	if (philo->id == 1)
 		pthread_mutex_lock(&philo->data->philo[philo->data->philo_count - 1].mutex_fork);
 	else
-		pthread_mutex_lock(&philo->data->philo[philo->id - 2].mutex_fork); //philo before you
+		pthread_mutex_lock(&philo->data->philo[philo->id - 2].mutex_fork);
 	print_status(philo, "has taken a fork\n", FALSE);
 	print_status(philo, "is eating\n", FALSE);
 	pthread_mutex_lock(&philo->check);
@@ -27,7 +27,7 @@ void	philo_eating(t_philo *philo)
 	if (philo->id == 1)
 		pthread_mutex_unlock(&philo->data->philo[philo->data->philo_count - 1].mutex_fork);
 	else
-		pthread_mutex_unlock(&philo->data->philo[philo->id - 2].mutex_fork); //philo before you
+		pthread_mutex_unlock(&philo->data->philo[philo->id - 2].mutex_fork);
 	philo->times_ate++;
 }
 
