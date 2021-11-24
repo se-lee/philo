@@ -1,9 +1,5 @@
 #include "philo.h"
 
-/*
-int gettimeofday(struct timeval *restrict tp, void *restrict tzp);
-*/
-
 long	get_time_in_ms(void)
 {
 	struct timeval	tp;

@@ -21,7 +21,7 @@ void	init_all_philo(t_data *data)
 	while (i < data->philo_count)
 	{
 		data->philo[i].id = i + 1;
-		data->philo[i].times_ate = 0;
+		data->philo[i].times_eaten = 0;
 		data->philo[i].data = data;
 		pthread_create(&data->philo[i].thread, NULL, philo_activities, &data->philo[i]);
 		pthread_mutex_init(&data->philo[i].mutex_fork, NULL);

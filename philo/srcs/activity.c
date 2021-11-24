@@ -28,9 +28,8 @@ void	philo_eating(t_philo *philo)
 		pthread_mutex_unlock(&philo->data->philo[philo->data->philo_count - 1].mutex_fork);
 	else
 		pthread_mutex_unlock(&philo->data->philo[philo->id - 2].mutex_fork);
-	philo->times_ate++;
+	philo->times_eaten++;
 }
-
 
 void	philo_sleeping(t_philo *philo)
 {
@@ -49,7 +48,7 @@ void	*philo_activities(void *arg)
 	philo->time_before_die = philo->data->time_actual + philo->data->time_to_die;
 	if (philo->id % 2 == 0)
 		usleep(2000);
-	while ((philo->data->eat_count == -1 || philo->times_ate < philo->data->eat_count)
+	while ((philo->data->eat_count == -1 || philo->times_eaten < philo->data->eat_count)
 		&& philo->data->died == 0)
 	{
 		philo_eating(philo);

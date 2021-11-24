@@ -12,16 +12,15 @@
 # define FALSE	0
 # define ERROR	-1
 
-typedef struct s_data t_data;
-typedef struct s_philo t_philo;
+typedef struct s_data	t_data;
+typedef struct s_philo	t_philo;
 
-/* every single philosopher will have this struct */
 struct s_philo
 {
 	int				id;
 	pthread_t		thread;
 	pthread_mutex_t	mutex_fork;
-	int				times_ate;
+	int				times_eaten;
 	long			time_before_die;
 	pthread_mutex_t	check;
 	t_data			*data;
@@ -66,7 +65,7 @@ void	ft_putnbr_fd(int n, int fd);
 
 /* parsing  */
 int		args_are_digit(char **argv);
-int		is_overflow(t_data *philo, char **argv);
+int		arg_overflow(t_data *philo, char **argv);
 int		put_valid_number_to_struct(t_data *philo, char **argv);
 
 /* time */

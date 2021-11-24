@@ -40,7 +40,7 @@ int		nbr_overflow(char *arg, int nbr_to_compare)
 	}
 }
 
-int		is_overflow(t_data *philo, char **argv)
+int		arg_overflow(t_data *philo, char **argv)
 {
 	if (nbr_overflow(argv[1], philo->philo_count))
 		return (TRUE);
@@ -72,7 +72,7 @@ int		put_valid_number_to_struct(t_data *philo, char **argv)
 	philo->time_to_sleep = ft_atoi(argv[4]);
 	if (argv[5])
 		philo->eat_count = ft_atoi(argv[5]);
-	if (is_overflow(philo, argv))
+	if (arg_overflow(philo, argv))
 	{
 		ft_putstr_fd("error: invalid argument\n", 2);
 		return (FALSE);

@@ -18,6 +18,9 @@ e duration
 Todo
 1) handle a case where there is only one philosopher
 2) protect functions with initializing threads/mutex, get time...what else?
+	(when creating threads/mutex fails)
+3) norm
+4) when do i free?
 
 */
 
@@ -31,7 +34,7 @@ void	main_loop(t_data *data)
 		data->time_actual = get_time_in_ms();
 		pthread_mutex_lock(&data->philo->check);
 		if ((data->time_actual > data->philo[i].time_before_die) 
-			&& (data->eat_count == -1 || data->philo[i].times_ate < data->eat_count))
+			&& (data->eat_count == -1 || data->philo[i].times_eaten < data->eat_count))
 			print_status(&data->philo[i], "died\n", TRUE);
 		pthread_mutex_unlock(&data->philo->check);
 		i++;
@@ -62,6 +65,7 @@ int	main(int argc, char **argv)
 			i++;
 		}
 	}
-	ft_putstr_fd("invalid number of arguments\n", 2);
+	else
+		ft_putstr_fd("invalid number of arguments\n", 2);
 	return (0);
 }
