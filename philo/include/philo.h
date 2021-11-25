@@ -64,9 +64,9 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
 /* parsing  */
-int		args_are_digit(char **argv);
-int		arg_overflow(t_data *philo, char **argv);
-int		put_valid_number_to_struct(t_data *philo, char **argv);
+int		args_are_positive_nbr(char **argv);
+int		args_overflow(t_data *philo, char **argv);
+int		parse(t_data *philo, int argc, char **argv);
 
 /* time */
 long	get_time_in_ms(void);

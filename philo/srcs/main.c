@@ -46,26 +46,22 @@ int	main(int argc, char **argv)
 	t_data	data;
 	int		i;
 
-	if (argc == 5 || argc == 6)
+	if (parse(&data, argc, argv) == ERROR)
 	{
-		if (!args_are_digit(argv))
-			return (-1);
-		if (!put_valid_number_to_struct(&data, argv))
-			return (-1);
-		data.philo = malloc_protected(sizeof(t_philo), data.philo_count);
-		init_all_philo(&data);
-		while (!data.died && data.philo_finished != data.philo_count)
-			main_loop(&data);
-		data.died = 1;
-		i = 0;
-		while (pthread_join(data.philo[i].thread, NULL))
-		{
-			pthread_mutex_destroy(&data.philo[i].mutex_fork);
-			data.time_actual = get_time_in_ms();
-			i++;
-		}
+		ft_putstr_fd("invalid arguments\n", 2);
+		return (-1);
 	}
-	else
-		ft_putstr_fd("invalid number of arguments\n", 2);
+	data.philo = malloc_protected(sizeof(t_philo), data.philo_count);
+	init_all_philo(&data);
+	while (!data.died && data.philo_finished != data.philo_count)
+		main_loop(&data);
+	data.died = 1;
+	i = 0;
+	while (pthread_join(data.philo[i].thread, NULL))
+	{
+		pthread_mutex_destroy(&data.philo[i].mutex_fork);
+		data.time_actual = get_time_in_ms();
+		i++;
+	}
 	return (0);
 }
