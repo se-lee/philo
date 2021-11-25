@@ -9,15 +9,29 @@ void	wait_upto(t_data *data, int time_to_wait)
 		usleep(200);
 }
 
-void	philo_eating(t_philo *philo)
+int		take_forks(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->mutex_fork);
+	if (pthread_mutex_lock(&philo->mutex_fork) != 0)
+		return (ERROR);
 	print_status(philo, "has taken a fork\n", FALSE);
 	if (philo->id == 1)
-		pthread_mutex_lock(&philo->data->philo[philo->data->philo_count - 1].mutex_fork);
+	{
+		if (pthread_mutex_lock(&philo->data->philo[philo->data->philo_count - 1].mutex_fork) != 0)
+			return (ERROR);
+	}
 	else
-		pthread_mutex_lock(&philo->data->philo[philo->id - 2].mutex_fork);
+	{
+		if (pthread_mutex_lock(&philo->data->philo[philo->id - 2].mutex_fork) != 0)
+			return (ERROR);
+	}
 	print_status(philo, "has taken a fork\n", FALSE);
+	return (0);
+}
+
+void	philo_eating(t_philo *philo)
+{
+	if (take_forks(philo) == ERROR)
+		return ;
 	print_status(philo, "is eating\n", FALSE);
 	pthread_mutex_lock(&philo->check);
 	philo->time_before_die = philo->data->time_actual + philo->data->time_to_die;

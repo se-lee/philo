@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 
 	if (parse(&data, argc, argv) == ERROR)
 	{
-		ft_putstr_fd("invalid arguments\n", 2);
+		ft_putstr_fd("invalid argument(s)\n", 2);
 		return (-1);
 	}
 	data.philo = malloc_protected(sizeof(t_philo), data.philo_count);

@@ -22,7 +22,7 @@ struct s_philo
 	pthread_mutex_t	mutex_fork;
 	int				times_eaten;
 	long			time_before_die;
-	pthread_mutex_t	check;
+	pthread_mutex_t	check; //rename this
 	t_data			*data;
 };
 
