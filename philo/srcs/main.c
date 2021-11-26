@@ -24,21 +24,25 @@ Todo
 
 */
 
-void	main_loop(t_data *data)
+int	main_loop(t_data *data)
 {
 	int		i;
-	
+
 	i = 0;
-	while (i < data->philo_count && !data->died)// && data->philo_finished != data->philo_count)
+	while (i < data->philo_count && !data->died) // && data->philo_finished != data->philo_count)
 	{
 		data->time_actual = get_time_in_ms();
-		pthread_mutex_lock(&data->philo->check);
-		if ((data->time_actual > data->philo[i].time_before_die) 
-			&& (data->eat_count == -1 || data->philo[i].times_eaten < data->eat_count))
+		if (pthread_mutex_lock(&data->philo->check) != 0)
+			return (ERROR);
+		if ((data->time_actual > data->philo[i].time_before_die)
+			&& (data->eat_count == -1
+				|| data->philo[i].times_eaten < data->eat_count))
 			print_status(&data->philo[i], "died\n", TRUE);
-		pthread_mutex_unlock(&data->philo->check);
+		if (pthread_mutex_unlock(&data->philo->check) != 0)
+			return (ERROR);
 		i++;
 	}
+	return (0);
 }
 
 int	main(int argc, char **argv)

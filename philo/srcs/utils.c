@@ -13,13 +13,15 @@ void	*malloc_protected(int size, int count)
 	return (ptr);
 }
 
-void	print_status(t_philo *philo, char *str, int in_main)
+int	print_status(t_philo *philo, char *str, int in_main)
 {
-	pthread_mutex_lock(&philo->data->print_mutex);
+	if (pthread_mutex_lock(&philo->data->print_mutex) != 0)
+		return (ERROR);
 	if (philo->data->died == 1)
 	{
-		pthread_mutex_unlock(&philo->data->print_mutex);
-		return ;
+		if (pthread_mutex_unlock(&philo->data->print_mutex))
+			return (ERROR);
+		return (0);
 	}
 	ft_putnbr_fd(philo->data->time_actual - philo->data->time_start, 1);
 	ft_putchar_fd(' ', 1);
@@ -28,5 +30,7 @@ void	print_status(t_philo *philo, char *str, int in_main)
 	ft_putstr_fd(str, 1);
 	if (in_main == TRUE)
 		philo->data->died = 1;
-	pthread_mutex_unlock(&philo->data->print_mutex);
+	if (pthread_mutex_unlock(&philo->data->print_mutex) != 0)
+		return (ERROR);
+	return (0);
 }

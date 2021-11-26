@@ -44,13 +44,13 @@ struct s_data
 
 /* activity */
 void	wait_upto(t_data *data, int time_to_wait);
-void	philo_eating(t_philo *philo);
+int		philo_eating(t_philo *philo);
 void	philo_sleeping(t_philo *philo);
 void	*philo_activities(void *arg);
 
 /* init */
-void	init_struct(t_data *data);
-void	init_all_philo(t_data *data);
+int		init_struct(t_data *data);
+int		init_all_philo(t_data *data);
 
 /* Libft parsing */
 int		ft_isdigit(int c);
@@ -73,6 +73,6 @@ long	get_time_in_ms(void);
 
 /* utils */
 void	*malloc_protected(int size, int count);
-void	print_status(t_philo *philo, char *str, int in_main);
+int		print_status(t_philo *philo, char *str, int in_main);
 
 #endif
