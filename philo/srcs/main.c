@@ -63,7 +63,8 @@ int	main(int argc, char **argv)
 	i = 0;
 	while (pthread_join(data.philo[i].thread, NULL))
 	{
-		pthread_mutex_destroy(&data.philo[i].mutex_fork);
+		if (pthread_mutex_destroy(&data.philo[i].mutex_fork))
+			return (ERROR);
 		data.time_actual = get_time_in_ms();
 		i++;
 	}
