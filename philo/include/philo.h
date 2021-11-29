@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:19 by selee             #+#    #+#             */
-/*   Updated: 2021/11/29 10:22:16 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/11/29 13:23:40 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ struct s_data
 };
 
 /* activity */
-void	wait_upto(t_data *data, int time_to_wait);
+void	wait_upto(t_data *data, long time_to_wait);
 int		philo_eating(t_philo *philo);
 void	philo_sleeping(t_philo *philo);
 void	*philo_activities(void *arg);

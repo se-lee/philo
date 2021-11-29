@@ -6,13 +6,13 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:38 by selee             #+#    #+#             */
-/*   Updated: 2021/11/29 11:25:54 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/11/29 13:24:06 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	wait_upto(t_data *data, int time_to_wait)
+void	wait_upto(t_data *data, long time_to_wait)
 {
 	long	time;
 
@@ -49,7 +49,7 @@ int	philo_eating(t_philo *philo)
 	if (take_forks(philo) == ERROR)
 		return (ERROR);
 	if (philo->data->philo_count == 1)
-		return (0);
+		return (ERROR);
 	print_status(philo, "is eating\n", FALSE);
 	if (pthread_mutex_lock(&philo->check) != 0)
 		return (ERROR);
@@ -110,9 +110,3 @@ void	*philo_activities(void *arg)
 		return ((void *)ERROR);
 	return (0);
 }
-
-
-/*
-when there is only one philo, wait until maximum time so that it dies.
-
-*/
