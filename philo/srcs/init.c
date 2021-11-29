@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:41 by selee             #+#    #+#             */
-/*   Updated: 2021/11/29 10:20:47 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/11/29 14:44:26 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,3 +52,11 @@ int	init_all_philo(t_data *data)
 	data->ready = 1;
 	return (0);
 }
+
+/*
+
+data->philo[i].time_before_die = INT64_MAX; == LONG_MAX(almost)
+so that they dont die while they are waiting
+
+
+*/

@@ -6,12 +6,13 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:21:09 by selee             #+#    #+#             */
-/*   Updated: 2021/11/29 10:24:54 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/11/29 14:55:17 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+/*
 void	*malloc_protected(int size, int count)
 {
 	void	*ptr;
@@ -20,10 +21,11 @@ void	*malloc_protected(int size, int count)
 	if (!ptr)
 	{
 		perror("malloc failure");
-		exit(EXIT_FAILURE);
+		return (ERROR);
 	}
 	return (ptr);
 }
+*/
 
 int	print_status(t_philo *philo, char *str, int in_main)
 {
@@ -41,7 +43,7 @@ int	print_status(t_philo *philo, char *str, int in_main)
 	ft_putchar_fd(' ', 1);
 	ft_putstr_fd(str, 1);
 	if (in_main == TRUE)
-		philo->data->died = 1;
+		philo->data->died = 1; //in main, print_status is used to announce the death of a philo
 	if (pthread_mutex_unlock(&philo->data->print_mutex) != 0)
 		return (ERROR);
 	return (0);
