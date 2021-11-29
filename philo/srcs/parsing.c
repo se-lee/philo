@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/29 10:21:01 by selee             #+#    #+#             */
+/*   Updated: 2021/11/29 10:27:11 by selee            ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	args_are_positive_nbr(char **argv)
 {
-	int		i;
-	int		j;
-	
+	int	i;
+	int	j;
+
 	i = 1;
 	while (argv[i])
 	{
@@ -20,7 +32,7 @@ int	args_are_positive_nbr(char **argv)
 	return (TRUE);
 }
 
-int		is_overflow(char *arg, int nbr_to_compare)
+int	is_overflow(char *arg, int nbr_to_compare)
 {
 	char	*temp;
 
@@ -37,7 +49,7 @@ int		is_overflow(char *arg, int nbr_to_compare)
 	}
 }
 
-int		args_overflow(t_data *data, char **argv)
+int	args_overflow(t_data *data, char **argv)
 {
 	if (is_overflow(argv[1], data->philo_count))
 		return (TRUE);
@@ -46,7 +58,7 @@ int		args_overflow(t_data *data, char **argv)
 	if (is_overflow(argv[3], data->time_to_eat))
 		return (TRUE);
 	if (is_overflow(argv[4], data->time_to_sleep))
-		return (TRUE);	
+		return (TRUE);
 	if (argv[5])
 	{
 		if (is_overflow(argv[5], data->eat_count))
@@ -55,7 +67,7 @@ int		args_overflow(t_data *data, char **argv)
 	return (FALSE);
 }
 
-int		parse(t_data *data, int argc, char **argv)
+int	parse(t_data *data, int argc, char **argv)
 {
 	if (!(argc == 5 || argc == 6))
 		return (ERROR);

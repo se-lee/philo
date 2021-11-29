@@ -1,26 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/29 10:20:55 by selee             #+#    #+#             */
+/*   Updated: 2021/11/29 11:43:54 by selee            ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 /*
-0 ./philo 
-1 number_of_philosophers 
-2 time_to_die 
-3 time_to_eat 
-4 time_to_sleep 
-5 [number_of_times_each_philosopher_must_eat]
-
-main loop:
-- get the time
-- check if someone died
-
-subtract actual_time - start_time to get th
-e duration
+subtract actual_time - start_time to get the duration
 
 Todo
 1) handle a case where there is only one philosopher
 2) protect functions with initializing threads/mutex, get time...what else?
 	(when creating threads/mutex fails)
-3) norm
 4) when do i free?
+
+check if the philo is one
 
 */
 
@@ -29,7 +30,7 @@ int	main_loop(t_data *data)
 	int		i;
 
 	i = 0;
-	while (i < data->philo_count && !data->died) // && data->philo_finished != data->philo_count)
+	while (i < data->philo_count && !data->died)
 	{
 		data->time_actual = get_time_in_ms();
 		if (pthread_mutex_lock(&data->philo->check) != 0)

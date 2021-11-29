@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/29 10:20:19 by selee             #+#    #+#             */
+/*   Updated: 2021/11/29 10:22:16 by selee            ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -22,7 +34,7 @@ struct s_philo
 	pthread_mutex_t	mutex_fork;
 	int				times_eaten;
 	long			time_before_die;
-	pthread_mutex_t	check; //rename this
+	pthread_mutex_t	check;
 	t_data			*data;
 };
 
