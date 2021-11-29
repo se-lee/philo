@@ -6,22 +6,14 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:55 by selee             #+#    #+#             */
-/*   Updated: 2021/11/29 13:17:33 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/11/29 13:34:11 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 /*
-subtract actual_time - start_time to get the duration
-
-Todo
-1) handle a case where there is only one philosopher
-2) protect functions with initializing threads/mutex, get time...what else?
-	(when creating threads/mutex fails)
 4) when do i free?
-
-check if the philo is one
 
 */
 
@@ -69,5 +61,6 @@ int	main(int argc, char **argv)
 		data.time_actual = get_time_in_ms();
 		i++;
 	}
+	free(data.philo);
 	return (0);
 }
