@@ -8,7 +8,7 @@ SRCS =	activity.c			\
 		parsing.c			\
 		utils.c				\
 
-GCCF = gcc -g -Wall -Wextra -Werror #-fsanitize=address
+GCCF = gcc -g -Wall -Wextra -Werror -fsanitize=address
 
 OBJS = $(addprefix bin/, ${SRCS:.c=.o})
 
