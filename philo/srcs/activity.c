@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:38 by selee             #+#    #+#             */
-/*   Updated: 2021/11/30 13:51:13 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/11/30 14:27:35 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,6 @@ int	philo_eating(t_philo *philo)
 	return (0);
 }
 
-/*
-if (pthread_mutex_lock(&philo->check_life) != 0)
-		return (ERROR);
-if it's locked, it cannot change the time_before_die 
-	(it cannot live longer); a philo may eat although he's already dead
-*/
-
 void	philo_sleeping(t_philo *philo)
 {
 	print_status(philo, "is sleeping\n", FALSE);
@@ -115,9 +108,3 @@ void	*philo_activities(void *arg)
 		return ((void *)ERROR);
 	return (0);
 }
-
-/*
-need to mutex lock before incrementing philo_finished
-because several philos may push the button at the same time,
-eg, two philos incrementing only once while it needs to increment twice
-*/

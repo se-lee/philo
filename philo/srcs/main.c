@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:55 by selee             #+#    #+#             */
-/*   Updated: 2021/11/30 11:35:09 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/11/30 14:23:55 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,6 @@ int	main_loop(t_data *data)
 	}
 	return (0);
 }
-
-/*
-if (pthread_mutex_lock(&data->philo->check_life) != 0)
-	return (ERROR); //check if the philo is dead or not
-*/
 
 int	main(int argc, char **argv)
 {
@@ -66,32 +61,3 @@ int	main(int argc, char **argv)
 	free(data.philo);
 	return (0);
 }
-
-// line 52:  if data.died is 1, 
-//			all the philos will stop what they are doing. for security
-// line 58:  need to update this otherwise philos can be stuck in wait_upto
-/*
-init_struct: initialize data before malloc philo
-mallocing the philo struct - it carries info about each philo
-
-two groups: only if the total
-even number id / odd number id
-
-odd number : group changing
-(thinking time gets longer)
-
-- gettimeofday: 
-if in activity function, every philo carries out the process
-(eg. 1000 philos)
-so rather than having gettimeofday func in activity, only do in main loop so that
-each thread can look up the value instead of redoing it (to optimize)
-
-- having *data inside each philo:
-to have access to neighbors (through data)
-
-- mutex example (with lever door)
-- mutex lock
-- fork gets available (=unlock)
-
-
-*/

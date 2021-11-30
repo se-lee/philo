@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:21:09 by selee             #+#    #+#             */
-/*   Updated: 2021/11/30 13:54:30 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/11/30 14:28:44 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,3 @@ void	wait_upto(t_data *data, long time_to_wait)
 	while (data->time_actual < time && !data->died)
 		usleep(200);
 }
-
-/*
-if (in_main == TRUE)
-	philo->data->died = 1; 
-//in main, print_status is used to announce the death of a philo
-*/
