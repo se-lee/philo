@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:41 by selee             #+#    #+#             */
-/*   Updated: 2021/11/30 11:27:28 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/11/30 13:51:57 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,5 @@ int	init_all_philo(t_data *data)
 
 data->philo[i].time_before_die = INT64_MAX; == LONG_MAX(almost)
 so that they dont die while they are waiting
-
 
 */

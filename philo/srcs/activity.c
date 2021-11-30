@@ -6,20 +6,11 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:38 by selee             #+#    #+#             */
-/*   Updated: 2021/11/30 11:36:17 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/11/30 13:51:13 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	wait_upto(t_data *data, long time_to_wait)
-{
-	long	time;
-
-	time = time_to_wait + data->time_actual;
-	while (data->time_actual < time && !data->died)
-		usleep(200);
-}
 
 int	take_forks(t_philo *philo)
 {
@@ -44,6 +35,23 @@ int	take_forks(t_philo *philo)
 	return (0);
 }
 
+int	release_forks(t_philo *philo)
+{
+	if (philo->id == 1)
+	{
+		if (pthread_mutex_unlock(&philo->data->philo
+				[philo->data->philo_count - 1].mutex_fork) != 0)
+			return (ERROR);
+	}
+	else
+	{
+		if (pthread_mutex_unlock(
+				&philo->data->philo[philo->id - 2].mutex_fork) != 0)
+			return (ERROR);
+	}
+	return (0);
+}
+
 int	philo_eating(t_philo *philo)
 {
 	if (take_forks(philo) == ERROR)
@@ -60,18 +68,8 @@ int	philo_eating(t_philo *philo)
 	wait_upto(philo->data, philo->data->time_to_eat);
 	if (pthread_mutex_unlock(&philo->mutex_fork) != 0)
 		return (ERROR);
-	if (philo->id == 1)
-	{
-		if (pthread_mutex_unlock(&philo->data->philo
-				[philo->data->philo_count - 1].mutex_fork) != 0)
-			return (ERROR);
-	}
-	else
-	{
-		if (pthread_mutex_unlock(
-				&philo->data->philo[philo->id - 2].mutex_fork) != 0)
-			return (ERROR);
-	}
+	if (release_forks(philo) == ERROR)
+		return (ERROR);
 	philo->times_eaten++;
 	return (0);
 }
