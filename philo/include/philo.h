@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:19 by selee             #+#    #+#             */
-/*   Updated: 2021/11/29 15:18:49 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/11/30 11:29:43 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ struct s_philo
 	pthread_mutex_t	mutex_fork;
 	int				times_eaten;
 	long			time_before_die;
-	pthread_mutex_t	check;//check life of a philo
+	pthread_mutex_t	check_life;
 	t_data			*data;
 };
 
@@ -84,7 +84,6 @@ int		parse(t_data *philo, int argc, char **argv);
 long	get_time_in_ms(void);
 
 /* utils */
-// void	*malloc_protected(int size, int count);
 int		print_status(t_philo *philo, char *str, int in_main);
 
 #endif

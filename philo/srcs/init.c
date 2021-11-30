@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:41 by selee             #+#    #+#             */
-/*   Updated: 2021/11/29 14:44:26 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/11/30 11:27:28 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	init_all_philo(t_data *data)
 			return (ERROR);
 		if (pthread_mutex_init(&data->philo[i].mutex_fork, NULL) != 0)
 			return (ERROR);
-		if (pthread_mutex_init(&data->philo[i].check, NULL) != 0)
+		if (pthread_mutex_init(&data->philo[i].check_life, NULL) != 0)
 			return (ERROR);
 		data->philo[i].time_before_die = INT64_MAX;
 		i++;

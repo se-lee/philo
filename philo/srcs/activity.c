@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:38 by selee             #+#    #+#             */
-/*   Updated: 2021/11/29 15:18:36 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/11/30 11:36:17 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ int	philo_eating(t_philo *philo)
 	if (philo->data->philo_count == 1)
 		return (ERROR);
 	print_status(philo, "is eating\n", FALSE);
-	if (pthread_mutex_lock(&philo->check) != 0)
-		return (ERROR); //if it's locked, it cannot change the time_before_die (it cannot live longer); a philo may eat although he's already dead
+	if (pthread_mutex_lock(&philo->check_life) != 0)
+		return (ERROR);
 	philo->time_before_die = philo->data->time_actual
 		+ philo->data->time_to_die;
-	if (pthread_mutex_unlock(&philo->check) != 0)
+	if (pthread_mutex_unlock(&philo->check_life) != 0)
 		return (ERROR);
 	wait_upto(philo->data, philo->data->time_to_eat);
 	if (pthread_mutex_unlock(&philo->mutex_fork) != 0)
@@ -75,6 +75,13 @@ int	philo_eating(t_philo *philo)
 	philo->times_eaten++;
 	return (0);
 }
+
+/*
+if (pthread_mutex_lock(&philo->check_life) != 0)
+		return (ERROR);
+if it's locked, it cannot change the time_before_die 
+	(it cannot live longer); a philo may eat although he's already dead
+*/
 
 void	philo_sleeping(t_philo *philo)
 {

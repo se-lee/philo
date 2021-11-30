@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:55 by selee             #+#    #+#             */
-/*   Updated: 2021/11/29 15:09:09 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/11/30 11:35:09 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,23 @@ int	main_loop(t_data *data)
 	while (i < data->philo_count && !data->died)
 	{
 		data->time_actual = get_time_in_ms();
-		if (pthread_mutex_lock(&data->philo->check) != 0)
-			return (ERROR); //check if the philo is dead or not
+		if (pthread_mutex_lock(&data->philo->check_life) != 0)
+			return (ERROR);
 		if ((data->time_actual > data->philo[i].time_before_die)
 			&& (data->eat_count == -1
 				|| data->philo[i].times_eaten < data->eat_count))
 			print_status(&data->philo[i], "died\n", TRUE);
-		if (pthread_mutex_unlock(&data->philo->check) != 0)
+		if (pthread_mutex_unlock(&data->philo->check_life) != 0)
 			return (ERROR);
 		i++;
 	}
 	return (0);
 }
+
+/*
+if (pthread_mutex_lock(&data->philo->check_life) != 0)
+	return (ERROR); //check if the philo is dead or not
+*/
 
 int	main(int argc, char **argv)
 {
@@ -49,19 +54,22 @@ int	main(int argc, char **argv)
 	init_all_philo(&data);
 	while (!data.died && data.philo_finished != data.philo_count)
 		main_loop(&data);
-	data.died = 1; // if data.died is 1, all the philos will stop what they are doing. for security
+	data.died = 1;
 	i = 0;
 	while (pthread_join(data.philo[i].thread, NULL))
 	{
 		if (pthread_mutex_destroy(&data.philo[i].mutex_fork))
 			return (ERROR);
-		data.time_actual = get_time_in_ms(); //need to update this otherwise philos can be stuck in wait_upto
+		data.time_actual = get_time_in_ms();
 		i++;
 	}
 	free(data.philo);
 	return (0);
 }
 
+// line 52:  if data.died is 1, 
+//			all the philos will stop what they are doing. for security
+// line 58:  need to update this otherwise philos can be stuck in wait_upto
 /*
 init_struct: initialize data before malloc philo
 mallocing the philo struct - it carries info about each philo
