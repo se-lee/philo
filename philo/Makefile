@@ -6,7 +6,6 @@ SRCS =	activity.c			\
 		libft_print.c		\
 		main.c				\
 		parsing.c			\
-		time.c				\
 		utils.c				\
 
 GCCF = gcc -g -Wall -Wextra -Werror #-fsanitize=address
