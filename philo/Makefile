@@ -8,7 +8,7 @@ SRCS =	activity.c			\
 		parsing.c			\
 		utils.c				\
 
-GCCF = gcc -g -Wall -Wextra -Werror -fsanitize=address
+GCCF = gcc -g -Wall -Wextra -Werror #-fsanitize=address
 
 OBJS = $(addprefix bin/, ${SRCS:.c=.o})
 
@@ -16,12 +16,12 @@ OBJS = $(addprefix bin/, ${SRCS:.c=.o})
 
 bin/%.o : 	srcs/%.c	include/philo.h
 			@mkdir -p $(dir $@)
-			${GCCF} -c $< -o $@ -Iinclude
+			${GCCF} -c $< -o $@ -Iinclude -pthread
 
 all :		libft_ ${NAME}
 
 $(NAME) :	${OBJS} include/philo.h
-			${GCCF} $(OBJS) -o $(NAME)
+			${GCCF} $(OBJS) -o $(NAME) -pthread -lpthread
 
 clean :
 			rm -f ${OBJS}
