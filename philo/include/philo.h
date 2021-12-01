@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:19 by selee             #+#    #+#             */
-/*   Updated: 2021/12/01 16:48:39 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/12/01 17:17:52 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,6 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
 /* parsing  */
-// int		args_are_positive_nbr(char **argv);
-int		args_are_positive_nbr(t_data *data);
-int		args_overflow(t_data *philo, char **argv);
 int		parse(t_data *philo, int argc, char **argv);
 
 /* time */
