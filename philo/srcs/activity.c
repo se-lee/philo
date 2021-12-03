@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:38 by selee             #+#    #+#             */
-/*   Updated: 2021/12/03 16:42:44 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 17:24:06 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,15 @@ void	*philo_activities(void *arg)
 
 	philo = (t_philo *)arg;
 // printf("data.ready_activity: %d\n", philo->data->ready);
-	while (!philo->data->ready)
-		usleep(500);
+	while (philo->data->ready == FALSE)
+		usleep(1000);
 	philo->time_before_die = philo->data->time_actual
 		+ philo->data->time_to_die;
 	if (philo->id % 2 == 0)
 		usleep(2000);
 	while ((philo->data->eat_count == -1
 			|| philo->times_eaten < philo->data->eat_count)
-		&& philo->data->died == 0)
+		&& philo->data->died == FALSE)
 	{
 		philo_eating(philo);
 		if (philo->data->philo_count == 1)

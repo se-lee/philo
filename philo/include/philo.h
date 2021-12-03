@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:19 by selee             #+#    #+#             */
-/*   Updated: 2021/12/03 13:25:56 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 17:18:30 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <pthread.h>
 # include <sys/time.h>
 # include <limits.h>
+# include <stdbool.h>
 
 # define TRUE	1
 # define FALSE	0
@@ -47,8 +48,8 @@ struct s_data
 	int				eat_count;
 	long			time_start;
 	long			time_actual;
-	int				died;
-	int				ready;
+	bool			died;
+	bool			ready;
 	int				philo_finished;
 	pthread_mutex_t	print_mutex;
 	t_philo			*philo;

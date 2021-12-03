@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:21:09 by selee             #+#    #+#             */
-/*   Updated: 2021/12/03 13:27:38 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 17:20:21 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	print_status(t_philo *philo, char *str, int in_main)
 {
 	if (pthread_mutex_lock(&philo->data->print_mutex) != 0)
 		return (ERROR);
-	if (philo->data->died == 1)
+	if (philo->data->died == TRUE)
 	{
 		if (pthread_mutex_unlock(&philo->data->print_mutex))
 			return (ERROR);
@@ -39,7 +39,7 @@ int	print_status(t_philo *philo, char *str, int in_main)
 	ft_putchar_fd(' ', 1);
 	ft_putstr_fd(str, 1);
 	if (in_main == TRUE)
-		philo->data->died = 1;
+		philo->data->died = TRUE;
 	if (pthread_mutex_unlock(&philo->data->print_mutex) != 0)
 		return (ERROR);
 	return (0);
@@ -50,7 +50,7 @@ void	wait_upto(t_data *data, long time_to_wait)
 	long	time;
 
 	time = time_to_wait + data->time_actual;
-	while (data->time_actual < time && !data->died)
+	while (data->time_actual < time && data->died == FALSE)
 		usleep(200);
 }
 
