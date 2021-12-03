@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:41 by selee             #+#    #+#             */
-/*   Updated: 2021/12/03 16:42:46 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 17:16:38 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,5 @@ int	init_all_philo(t_data *data)
 	data->time_start = get_time_in_ms();
 	data->time_actual = get_time_in_ms();
 	data->ready = 1;
-// printf("data.ready_init: %d\n", data->ready);
 	return (0);
 }
