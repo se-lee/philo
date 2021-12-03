@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:50 by selee             #+#    #+#             */
-/*   Updated: 2021/11/29 10:20:51 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 11:17:48 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,4 @@ char	*ft_itoa(int n)
 	}
 	str[i] = nbr % 10 + '0';
 	return (str);
-}
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] == s2[i] && s1[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

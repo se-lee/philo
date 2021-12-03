@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:21:01 by selee             #+#    #+#             */
-/*   Updated: 2021/12/01 17:04:47 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 11:17:39 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,6 @@ int	args_are_positive_digit(char **argv)
 		i++;
 	}
 	return (TRUE);
-}
-
-int	is_overflow(char *arg, int nbr_to_compare)
-{
-	char	*temp;
-
-	temp = ft_itoa(nbr_to_compare);
-	if (ft_strcmp(arg, temp) != 0)
-	{
-		free(temp);
-		return (TRUE);
-	}
-	else
-	{
-		free(temp);
-		return (FALSE);
-	}
 }
 
 int	parse(t_data *data, int argc, char **argv)

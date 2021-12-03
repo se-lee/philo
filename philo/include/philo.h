@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:19 by selee             #+#    #+#             */
-/*   Updated: 2021/12/01 17:17:52 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 11:17:52 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int		init_all_philo(t_data *data);
 int		ft_isdigit(int c);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
-int		ft_strcmp(char *s1, char *s2);
 
 /* Libft print */
 void	ft_putchar_fd(char c, int fd);
