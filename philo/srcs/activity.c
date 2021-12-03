@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:38 by selee             #+#    #+#             */
-/*   Updated: 2021/12/03 17:24:06 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 17:40:47 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	*philo_activities(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-// printf("data.ready_activity: %d\n", philo->data->ready);
 	while (philo->data->ready == FALSE)
 		usleep(1000);
 	philo->time_before_die = philo->data->time_actual

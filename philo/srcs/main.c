@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:55 by selee             #+#    #+#             */
-/*   Updated: 2021/12/03 17:19:32 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 17:40:59 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	main(int argc, char **argv)
 		main_loop(&data);
 	data.died = TRUE;
 	i = 0;
+	usleep(1000);
 	while (pthread_join(data.philo[i].thread, NULL))
 	{
 		if (pthread_mutex_destroy(&data.philo[i].mutex_fork) != 0)
