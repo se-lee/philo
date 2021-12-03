@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:38 by selee             #+#    #+#             */
-/*   Updated: 2021/11/30 15:13:56 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 11:51:49 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ void	*philo_activities(void *arg)
 	philo->data->philo_finished++;
 	if (pthread_mutex_unlock(&philo->data->print_mutex) != 0)
 		return ((void *)ERROR);
+//	usleep(); //to make sure pthreadjoin is started
 	return (0);
 }

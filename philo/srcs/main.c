@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:55 by selee             #+#    #+#             */
-/*   Updated: 2021/12/02 10:50:20 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 11:53:22 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int argc, char **argv)
 	t_data	data;
 	int		i;
 
+	init_struct(&data);
 	if (parse(&data, argc, argv) == ERROR)
 	{
 		ft_putstr_fd("invalid argument(s)\n", 2);
@@ -46,7 +47,8 @@ int	main(int argc, char **argv)
 	data.philo = malloc(sizeof(t_philo) * data.philo_count);
 	if (!data.philo)
 		return (ERROR);
-	init_all_philo(&data);
+	if (init_all_philo(&data) == ERROR)
+		return (ERROR);
 	while (!data.died && data.philo_finished != data.philo_count)
 		main_loop(&data);
 	data.died = 1;

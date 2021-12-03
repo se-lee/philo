@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:21:01 by selee             #+#    #+#             */
-/*   Updated: 2021/12/03 11:17:39 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 11:18:47 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	parse(t_data *data, int argc, char **argv)
 {
 	if (!(argc == 5 || argc == 6))
 		return (ERROR);
-	init_struct(data);
 	if (!args_are_positive_digit(argv))
 		return (ERROR);
 	data->philo_count = ft_atoi(argv[1]);
