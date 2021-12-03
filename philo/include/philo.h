@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:19 by selee             #+#    #+#             */
-/*   Updated: 2021/12/03 11:17:52 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 13:25:56 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ long	get_time_in_ms(void);
 /* utils */
 int		print_status(t_philo *philo, char *str, int in_main);
 void	wait_upto(t_data *data, long time_to_wait);
+int		destroy_mutex(t_data *data, int i);
 
 #endif

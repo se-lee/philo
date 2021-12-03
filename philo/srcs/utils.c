@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:21:09 by selee             #+#    #+#             */
-/*   Updated: 2021/11/30 14:28:44 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 13:27:38 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,13 @@ void	wait_upto(t_data *data, long time_to_wait)
 	time = time_to_wait + data->time_actual;
 	while (data->time_actual < time && !data->died)
 		usleep(200);
+}
+
+int	destroy_mutex(t_data *data, int i)
+{
+	if (pthread_mutex_destroy(&data->philo[i].mutex_fork) != 0)
+		return (ERROR);
+	if (pthread_mutex_destroy(&data->philo[i].check_life) != 0)
+		return (ERROR);
+	return (0);
 }
