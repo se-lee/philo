@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:55 by selee             #+#    #+#             */
-/*   Updated: 2021/12/06 09:47:46 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/12/06 10:16:16 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,26 @@ int	main_loop(t_data *data)
 	return (0);
 }
 
+int	finish_thread(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (pthread_join(data->philo[i].thread, NULL))
+	{
+		if (pthread_mutex_destroy(&data->philo[i].mutex_fork) != 0)
+			return (ERROR);
+		if (pthread_mutex_destroy(&data->philo[i].check_life) != 0)
+			return (ERROR);
+		data->time_actual = get_time_in_ms();
+		i++;
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
-	int		i;
 
 	init_struct(&data);
 	if (parse(&data, argc, argv) == ERROR)
@@ -52,16 +68,8 @@ int	main(int argc, char **argv)
 	while (data.died == FALSE && data.philo_finished != data.philo_count)
 		main_loop(&data);
 	data.died = TRUE;
-	i = 0;
-	while (pthread_join(data.philo[i].thread, NULL))
-	{
-		if (pthread_mutex_destroy(&data.philo[i].mutex_fork) != 0)
-			return (ERROR);
-		if (pthread_mutex_destroy(&data.philo[i].check_life) != 0)
-			return (ERROR);
-		data.time_actual = get_time_in_ms();
-		i++;
-	}
+	if (finish_thread(&data) == ERROR)
+		return (ERROR);
 	free(data.philo);
 	return (0);
 }
