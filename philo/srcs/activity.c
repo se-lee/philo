@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:38 by selee             #+#    #+#             */
-/*   Updated: 2021/12/03 17:40:47 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/12/06 10:08:44 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	take_forks(t_philo *philo)
 
 int	release_forks(t_philo *philo)
 {
+	if (pthread_mutex_unlock(&philo->mutex_fork) != 0)
+		return (ERROR);
 	if (philo->id == 1)
 	{
 		if (pthread_mutex_unlock(&philo->data->philo
@@ -66,8 +68,6 @@ int	philo_eating(t_philo *philo)
 	if (pthread_mutex_unlock(&philo->check_life) != 0)
 		return (ERROR);
 	wait_upto(philo->data, philo->data->time_to_eat);
-	if (pthread_mutex_unlock(&philo->mutex_fork) != 0)
-		return (ERROR);
 	if (release_forks(philo) == ERROR)
 		return (ERROR);
 	philo->times_eaten++;
@@ -106,6 +106,5 @@ void	*philo_activities(void *arg)
 	philo->data->philo_finished++;
 	if (pthread_mutex_unlock(&philo->data->print_mutex) != 0)
 		return ((void *)ERROR);
-//	usleep(); //to make sure pthreadjoin is started
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: selee <selee@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 10:20:41 by selee             #+#    #+#             */
-/*   Updated: 2021/12/03 17:22:40 by selee            ###   ########lyon.fr   */
+/*   Updated: 2021/12/06 10:06:23 by selee            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	init_struct(t_data *data)
 	data->time_to_sleep = 0;
 	data->eat_count = -1;
 	data->died = FALSE;
-	// data->ready = FALSE;
+	data->ready = FALSE;
 	data->philo_finished = 0;
 	if (pthread_mutex_init(&data->print_mutex, NULL) != 0)
 		return (ERROR);
